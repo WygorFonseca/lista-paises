@@ -130,14 +130,15 @@ export default {
   },
   methods: {
     dateFromTimeZone (timezone) {
-      let date = new Date(new Date().toLocaleString('pt-BR', { timeZone: 'UTC' }));
+      let date = new Date();
+
       const hours = parseInt(timezone.substring(3, 6))
       const minutes = parseInt(timezone.substring(7, 9))
 
-      date.setHours(date.getHours() + hours)
-      date.setMinutes(date.getMinutes() + minutes)
+      if( !isNaN(hours) ) date.setHours(date.getHours() + hours)
+      if( !isNaN(minutes) ) date.setMinutes(date.getMinutes() + minutes)
 
-      return date.toLocaleString("pt-BR")
+      return date.toLocaleString('pt-BR', { timeZone: 'UTC' })
     },
     formatArea (area) {
       if(area == null) return "Não definido";
