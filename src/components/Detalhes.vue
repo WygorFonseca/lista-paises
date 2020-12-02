@@ -55,7 +55,7 @@
               <i class="fas fa-sm fa-money-bill"></i> Moeda utilizada
             </h5>
             <div v-for="(currency, index) in countryCurrencies" :key="'cur_'+index" class="bg-light rounded p-2 mb-2">
-              {{ currency.name }} ({{ currency.code }}) - Símbolo: {{ currency.symbol }}
+              {{ currency.name }} {{ currency.code != "(none)" ? `(${currency.code})` : '' }} - Símbolo: {{ currency.symbol }}
             </div>
           </section>
           <!-- Idiomas -->
@@ -182,7 +182,7 @@ export default {
     },
     formatArea (area) {
       if(area == null) return "Não definido";
-      return area.toLocaleString('pt-BR') + ' m²'
+      return area.toLocaleString('pt-BR') + ' km²'
     },
     commaSeparator (array) {
       return array.join(', ')
