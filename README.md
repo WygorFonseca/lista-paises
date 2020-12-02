@@ -28,6 +28,7 @@ npm run serve
 ```
 
 ### Compilar e minificar uma versão para produção
+- Será gerado um diretório "dist" dentro de src.
 ```
 yarn build
 ```
