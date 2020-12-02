@@ -10,6 +10,7 @@
           <th>País</th>
           <th>Regiao</th>
           <th></th>
+          <th></th>
         </tr>
       </thead>
       <transition-group name="countries-list" tag="tbody">
@@ -22,6 +23,11 @@
           </td>
           <td class="align-middle">{{ country.translations.br }}</td>
           <td class="align-middle">{{ country.region ? country.region : 'N/A' }}</td>
+          <td class="align-middle text-right">
+            <a :href="'https://www.google.com/maps/place/' + country.name" target="_blank" rel="noopener noreferrer">
+              <i class="fas fa-map-marked-alt"></i>
+            </a>
+          </td>
           <td class="align-middle text-right">
             <router-link :to="'/detalhes/' + country.alpha2Code" tag="button" class="btn btn-sm btn-primary">
               <div class="d-flex flex-row align-items-center">
@@ -57,7 +63,7 @@
 
 <script>
 export default {
-  props: ['countries'],
+  props: ['countries', 'showCoords'],
   data () {
     return {
       page: 1,

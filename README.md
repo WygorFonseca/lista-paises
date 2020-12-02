@@ -35,3 +35,23 @@ ou
 ```
 npm run build
 ```
+
+## Sobre
+
+### Funcionalidades
+- Paginação da lista de países com animações
+- Busca por nome do país
+- Filtro por blocos regionais (Com campo de busca)
+- Página com informações detalhadas sobre cada país
+- Ao selecionar um idioma nos detalhes do país a aplicação lista outros países que possuem o idioma em comum
+- Opção de busca na lista de países por idioma
+- Erros tratados caso a api esteja indisponível
+- Design responsivo
+
+### Libs, ferramentas e tecnologias
+- Axios
+- Bootstrap
+- Vue.JS
+- Vue-router
+- Vue-select
+- Font-awesome icons

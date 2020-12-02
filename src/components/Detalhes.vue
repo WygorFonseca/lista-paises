@@ -85,7 +85,7 @@
             </div>
             <div class="text-danger mt-2" v-else-if="errorBorders">
               <i class="fas fa-exclamation-triangle"></i> Erro ao carregar fronteiras.
-              <a @click="getBorderCountries()">Tente novamente</a>
+              <a @click="getBorderCountries()" class="cursor-pointer">Tente novamente</a>
             </div>
             <div class="mt-2" v-else>
               <i class="fas fa-spinner fa-spin"></i> Carregando fronteiras...

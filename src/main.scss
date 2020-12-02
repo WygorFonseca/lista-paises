@@ -32,6 +32,10 @@ html, body {
   background: #f9f9f9;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .fade-transition-enter-active, .fade-transition-leave-active {
   transition: opacity 150ms ease;
 }
