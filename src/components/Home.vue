@@ -17,7 +17,7 @@
             <i class="fa fa-sync"></i> Tentar novamente.
           </button>
         </div>
-        <div class="table-responsive-sm col-lg-8 col-md-10 mx-2 rounded bg-white p-3 shadow-sm" v-else key="afterLoading">
+        <div class="table-responsive-sm col-lg-8 col-md-10 mx-2 rounded bg-white p-3 shadow-sm mb-5" v-else key="afterLoading">
           <CountriesTable :countries="filteredCountries" />
         </div>
       </transition>
