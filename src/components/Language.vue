@@ -6,8 +6,11 @@
           <i class="fas fa-spinner fa-spin"></i> Carregando países, por-favor aguarde.
         </div>
       </div>
-      <div class="row h-100 mt-auto mb-auto justify-content-center" v-else key="afterLoading">
-        <div class="col-lg-8 table-responsive my-auto col-md-10 col-11 rounded bg-white p-3 pt-4 shadow-sm">
+      <div class="row h-100 my-auto justify-content-center" v-else key="afterLoading">
+        <div class="col-lg-8 table-responsive my-auto col-md-10 col-11 rounded bg-white p-3 shadow-sm">
+          <h6 class="mb-3" v-if="languageName">
+            {{ countries.length }} Paíse{{ countries.length != 1 ? 's' : '' }} que falam {{ languageName }}
+          </h6>
           <CountriesTable :countries="countries" />
         </div>
       </div>
@@ -28,6 +31,17 @@ export default {
     return {
       countries: '',
       loading: true
+    }
+  },
+  computed: {
+    languageName () {
+      const firstCountry = this.countries[0];
+
+      if(firstCountry){
+        return firstCountry.languages[0].name + " - " + firstCountry.languages[0].nativeName
+      }
+
+      return null
     }
   },
   methods: {

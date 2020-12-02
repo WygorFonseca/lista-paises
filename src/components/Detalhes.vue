@@ -41,7 +41,7 @@
               <div class="bg-light p-3 rounded text-center border-gray border">
                 <i class="fas fa-lg fa-users"></i>
                 <h6 class="mb-0 mt-2">População</h6>
-                <small>{{ country.population.toLocaleString('pt-BR') }}</small>
+                <small>{{ country.population != 0 ? country.population.toLocaleString('pt-BR') : "?" }}</small>
               </div>
             </div>
           </section>
@@ -85,14 +85,18 @@
             <h5>
               <i class="fas fa-sm fa-info-circle"></i> Outras informações
             </h5>
-            <p class="mb-1">
-              <b>Código de chamada: </b> {{ country.callingCodes.map(el => '+' + el).join(',') }}
+            <p class="mb-1" v-if="country.subregion">
+              <b>Sub-região: </b> {{ country.subregion }}
             </p>
-            <p class="mb-1">
-              <b>Latitude e Longitude: </b> {{ country.latlng.join(', ') }}
+            <p class="mb-1" v-if="country.latlng.length != 0">
+              <b>Latitude e Longitude: </b> {{ commaSeparator(country.latlng) }} - 
+              <a :href="'https://www.google.com/maps/place/' + country.name" target="_blank" rel="noopener noreferrer">Ver no mapa</a>
             </p>
-            <p class="mb-1">
-              <b>TLD do país: </b> {{ country.topLevelDomain.join(', ') }}
+            <p class="mb-1" v-if="country.callingCodes.length != 0">
+              <b>Código de chamada: </b> {{ country.callingCodes.map(el => el != '' ? ('+' + el) : 'Não possui').join(', ') }}
+            </p>
+            <p class="mb-1" v-if="country.topLevelDomain.length != 0">
+              <b>Top Level Domain (TLD): </b> {{ commaSeparator(country.topLevelDomain) }}
             </p>
             <!-- {{ country.altSpellings.join(', ') }} -->
           </section>

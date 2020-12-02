@@ -14,14 +14,11 @@
       </thead>
       <transition-group name="countries-list" tag="tbody">
         <tr v-for="(country, index) in pagedCountries" v-bind:key="'pais_' + index">
-          <!-- <td scope="row">{{ index }}</td> -->
           <td class="align-middle" v-if="canLoadImage">
             <img :src="country.flag" :alt="'Bandeira_' + country.name" width="25" class="rounded shadow-sm">
           </td>
           <td class="align-middle" v-else>
-            <div style="width: 25px; height: 16px" class="css-selector rounded">
-
-            </div>
+            <div style="width: 25px; height: 16px" class="gradient-loading rounded"></div>
           </td>
           <td class="align-middle">{{ country.translations.br }}</td>
           <td class="align-middle">{{ country.region }}</td>
@@ -40,13 +37,13 @@
         <i class="fas fa-frown"></i> Nenhum resultado encontrado
       </p>
     </div>
-    <nav aria-label="Navegação por páginas" v-if="pages != 0">
+    <nav aria-label="Navegação por páginas" v-if="pages > 1">
       <ul class="pagination justify-content-center">
         <li class="page-item" :class="page == 1 ? 'disabled' : ''">
           <a class="page-link" @click="page != 1 ? page-- : ''"><i class="fas fa-angle-double-left"></i></a>
         </li>
         <li class="page-item">
-          <a class="page-link" href="#">
+          <a class="page-link">
             <b>{{ page }}</b> de <b>{{ pages }}</b>
           </a>
         </li>
@@ -96,6 +93,9 @@ export default {
     }
   },
   watch: {
+    countries () {
+      this.page = 1
+    },
     search (text) {
       this.page = 1
 
