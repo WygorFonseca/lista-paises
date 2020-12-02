@@ -6,12 +6,27 @@
           <i class="fas fa-spinner fa-spin"></i> Carregando países, por-favor aguarde.
         </div>
       </div>
-      <div class="row h-100 my-auto justify-content-center" v-else key="afterLoading">
+      <div class="row h-100 my-auto justify-content-center" v-else-if="!error" key="afterLoading">
         <div class="col-lg-8 table-responsive my-auto col-md-10 col-11 rounded bg-white p-3 shadow-sm">
-          <h6 class="mb-3" v-if="languageName">
-            {{ countries.length }} Paíse{{ countries.length != 1 ? 's' : '' }} que falam {{ languageName }}
-          </h6>
+          <div class="d-flex flex-row align-items-center mb-3">
+            <button @click="$router.go(-1)" class="btn btn-sm">
+              <i class="fa fa-arrow-left"></i>
+            </button>
+            <h6 class="mb-0 ml-1" v-if="languageName">
+              {{ countries.length }} País{{ countries.length != 1 ? 'es' : '' }} que fala{{ countries.length != 1 ? 'm' : '' }} {{ languageName }}
+            </h6>
+          </div>
           <CountriesTable :countries="countries" />
+        </div>
+      </div>
+      <div class="row h-100 my-auto justify-content-center" v-else key="afterLoadingError">
+        <div class="col-lg-5 col-md-10 col-10 rounded bg-white p-3 shadow-sm my-auto text-center">
+          <p>
+            <i class="fas fa-times"></i> Ops! Houve um erro ao carregar!
+          </p>
+          <router-link to="/" tag="button" class="btn btn-sm btn-primary">
+            <i class="fa fa-home"></i> Voltar ao início
+          </router-link>
         </div>
       </div>
     </transition>
@@ -30,7 +45,8 @@ export default {
   data () {
     return {
       countries: '',
-      loading: true
+      loading: true,
+      error: false,
     }
   },
   computed: {
@@ -51,6 +67,7 @@ export default {
         this.countries = response.data
       })
       .catch(error => {
+        this.error = true
         console.log(error);
       })
       .then(() => this.loading = false)
@@ -62,6 +79,7 @@ export default {
   watch: {
     $route: function () {
       this.loading = true;
+      this.error = false;
       this.getCountries()
     }
   }

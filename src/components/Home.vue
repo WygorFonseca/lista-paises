@@ -1,7 +1,7 @@
 <template>
   <div class="container animate__animated animate__bounce py-3 h-100">
     <div class="row justify-content-center">
-      <div class="col-lg-8 col-md-10 mx-2 mb-3 rounded bg-white p-3 shadow-sm" v-if="!loading">
+      <div class="col-lg-8 col-md-10 mx-2 mb-3 rounded bg-white p-3 shadow-sm" v-if="!loading && !error">
         <h6>Filtre por blocos regionais</h6>
         <v-select :options="regionalBlocs" v-model="regionalBlocsSelected" label="name" multiple ></v-select>
       </div>
@@ -11,7 +11,13 @@
         <div class="col-lg-5 col-md-10 col-10 mx-2 rounded bg-white p-3 shadow-sm text-center" v-if="loading" key="loading">
           <i class="fas fa-spinner fa-spin"></i> Carregando países, por-favor aguarde.
         </div>
-        <div class="table-responsive col-lg-8 col-md-10 mx-2 rounded bg-white p-3 shadow-sm" v-else key="afterLoading">
+        <div class="col-lg-5 col-md-10 col-10 mx-2 rounded bg-white p-3 shadow-sm text-center" v-else-if="error" key="afterLoadingError">
+          <p><i class="fas fa-times"></i> Ops. Houve um erro ao carregar.</p>
+          <button class="btn btn-sm btn-primary" @click="getCountries()">
+            <i class="fa fa-sync"></i> Tentar novamente.
+          </button>
+        </div>
+        <div class="table-responsive-sm col-lg-8 col-md-10 mx-2 rounded bg-white p-3 shadow-sm" v-else key="afterLoading">
           <CountriesTable :countries="filteredCountries" />
         </div>
       </transition>
@@ -29,6 +35,7 @@ export default {
   },
   data () {
     return {
+      error: false,
       loading: true,
       countries: [],
       regionalBlocsSelected: []
@@ -58,14 +65,16 @@ export default {
   },
   methods: {
     getCountries () {
+      this.loading = true;
+      this.error = false;
+
       setTimeout(() => {
         axios.get('https://restcountries.eu/rest/v2/all')
         .then(({ data }) => {
           this.countries = data
-          console.log(data.map(el => el.timezones[0]))
         })
-        .catch(error => {
-          console.log(error);
+        .catch(() => {
+          this.error = true
         })
         .then(() => this.loading = false)
       }, 500)

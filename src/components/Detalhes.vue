@@ -1,17 +1,16 @@
 <template>
-  <div class="container py-3 h-100" v-if="country">
+  <div class="container py-3 h-100">
     <div class="row h-100 mt-auto mb-auto justify-content-center">
       <transition name="fade-transition" mode="out-in">
         <div class="col-lg-5 col-md-10 col-10 rounded bg-white p-3 shadow-sm my-auto text-center" v-if="loading" key="loading">
           <i class="fas fa-spinner fa-spin"></i> Carregando detalhes, por-favor aguarde.
         </div>
-        <div class="col-lg-8 col-md-10 col-11 mb-3 rounded bg-white p-3 shadow-sm my-auto" v-else key="afterLoading">
-          <!-- <h6>Dados do país</h6> -->
+        <div class="col-lg-8 col-md-10 col-11 mb-3 rounded bg-white p-3 shadow-sm my-auto" v-else-if="!error && country" key="afterLoading">
           <div class="d-flex flex-row align-items-center border-bottom border-light mb-2 pb-2">
             <img :src="country.flag" :alt="'Bandeira_' + country.name" width="30" class="rounded mr-2 shadow-sm">
             <h6 class="mb-0">{{ country.translations.br }} &middot; {{ country.alpha2Code }}</h6>
-            <router-link to="/" class="ml-auto btn btn-sm btn-outline-secondary" tag="button">
-              <i class="fa fa-arrow-left"></i> Voltar
+            <router-link to="/" class="ml-auto btn btn-sm btn-primary" tag="button">
+              <i class="fa fa-home"></i> Início
             </router-link>
           </div>
           <!-- Cards -->
@@ -41,7 +40,7 @@
               <div class="bg-light p-3 rounded text-center border-gray border">
                 <i class="fas fa-lg fa-users"></i>
                 <h6 class="mb-0 mt-2">População</h6>
-                <small>{{ country.population != 0 ? country.population.toLocaleString('pt-BR') : "?" }}</small>
+                <small>{{ country.population.toLocaleString('pt-BR') }}</small>
               </div>
             </div>
           </section>
@@ -116,6 +115,15 @@
             </p>
           </section>
         </div>
+        <div class="col-lg-5 col-md-10 col-10 rounded bg-white p-3 shadow-sm my-auto text-center" v-else key="afterLoadingError">
+          <p>
+            <i class="fas fa-times"></i> Ops! Houve um erro ao carregar!
+          </p>
+          <router-link to="/" tag="button" class="btn btn-sm btn-primary">
+            <i class="fa fa-home"></i> Voltar ao início
+          </router-link>
+        </div>
+        a
       </transition>
     </div>
   </div>
@@ -128,6 +136,7 @@ export default {
   props: ['countryCode'],
   data () {
     return {
+      error: false,
       country: '',
       loading: true
     }
@@ -156,8 +165,8 @@ export default {
       .then(response => {
         this.country = response.data
       })
-      .catch(error => {
-        console.log(error);
+      .catch(() => {
+        this.error = true
       })
       .then(() => this.loading = false)
     }
@@ -168,6 +177,7 @@ export default {
   watch: {
     $route: function () {
       this.loading = true;
+      this.error = false;
       this.getCountryByCode()
     }
   }

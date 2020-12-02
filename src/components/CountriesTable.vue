@@ -21,8 +21,8 @@
             <div style="width: 25px; height: 16px" class="gradient-loading rounded"></div>
           </td>
           <td class="align-middle">{{ country.translations.br }}</td>
-          <td class="align-middle">{{ country.region }}</td>
-          <td class="align-middle">
+          <td class="align-middle">{{ country.region ? country.region : 'N/A' }}</td>
+          <td class="align-middle text-right">
             <router-link :to="'/detalhes/' + country.alpha2Code" tag="button" class="btn btn-sm btn-primary">
               <div class="d-flex flex-row align-items-center">
                 <i class="fas fa-eye"></i> <span class="d-none d-sm-block ml-2">Ver detalhes</span>
@@ -78,8 +78,8 @@ export default {
 
         return countryName.startsWith(search) || countryName.includes(search)
       }).sort((a, b) => {
-        const A_brname = a.translations.br.toLowerCase()
-        const B_brname = b.translations.br.toLowerCase()
+        const A_brname = a.translations.br.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+        const B_brname = b.translations.br.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
 
         if(search != ''){
           return A_brname.startsWith(this.search.toLowerCase()) ? -1 : 1
