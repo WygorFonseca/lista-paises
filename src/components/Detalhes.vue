@@ -54,7 +54,7 @@
             <h5>
               <i class="fas fa-sm fa-money-bill"></i> Moeda utilizada
             </h5>
-            <div v-for="(currency, index) in country.currencies" :key="'cur_'+index" class="bg-light rounded p-2 mb-2">
+            <div v-for="(currency, index) in countryCurrencies" :key="'cur_'+index" class="bg-light rounded p-2 mb-2">
               {{ currency.name }} ({{ currency.code }}) - Símbolo: {{ currency.symbol }}
             </div>
           </section>
@@ -161,6 +161,11 @@ export default {
       loading: true,
       loadingBorders: false, // Carregando fronteiras
       borderCountriesData: [] // Dados das fronteiras
+    }
+  },
+  computed: {
+    countryCurrencies () {
+      return this.country.currencies.filter(currency => currency.code != null &&  currency.name != null)
     }
   },
   methods: {

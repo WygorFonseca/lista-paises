@@ -1,13 +1,14 @@
 # Lista de Países
 
 ## Demonstação
-- Disponível temporariamente
-- [http://paises-demo.ddns.net/](http://paises-demo.ddns.net/).
+- Disponível temporariamente em:
+- [http://paises-demo.ddns.net/](http://paises-demo.ddns.net/)
 
 ## Instruções para instalação
 
 ### Instale as dependências
-Você pode usar o gerênciador de pacotes que preferir (yarn, npm..)
+- Você pode usar o gerênciador de pacotes que preferir (yarn, npm..)
+- Dentro da pasta do projeto execute os comandos a seguir
 
 ```
 yarn install
@@ -34,50 +35,3 @@ ou
 ```
 npm run build
 ```
-
-
-
-
-
-
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
-
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
