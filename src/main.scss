@@ -1,0 +1,49 @@
+// BOOTSTRAP
+@import "../node_modules/bootstrap/scss/bootstrap";
+@import "@fortawesome/fontawesome-free/scss/fontawesome";
+
+$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
+
+@import "@fortawesome/fontawesome-free/scss/solid";
+
+// Vue-Select component scss
+@import "vue-select/src/scss/vue-select.scss";
+
+html, body {
+  height: 100%;
+  background: #f9f9f9;
+}
+
+.fade-transition-enter-active, .fade-transition-leave-active {
+  transition: opacity 150ms ease;
+}
+.fade-transition-enter, .fade-transition-leave-to {
+  opacity: 0;
+}
+.countries-list-move {
+  transition: transform 500ms;
+}
+.css-selector {
+  background: linear-gradient(270deg, #d4d4d4, #a7a7a7);
+  background-size: 400% 400%;
+
+  -webkit-animation: BrackgroundPosAnim 2s ease infinite;
+  -moz-animation: BrackgroundPosAnim 2s ease infinite;
+  animation: BrackgroundPosAnim 2s ease infinite;
+}
+
+@-webkit-keyframes BrackgroundPosAnim {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+@-moz-keyframes BrackgroundPosAnim {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+@keyframes BrackgroundPosAnim {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
