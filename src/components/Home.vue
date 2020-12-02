@@ -1,5 +1,5 @@
 <template>
-  <div class="container animate__animated animate__bounce py-3 h-100">
+  <div class="container py-3 h-100">
     <div class="row justify-content-center">
       <div class="col-lg-8 col-md-10 mx-2 mb-3 rounded bg-white p-3 shadow-sm" v-if="!loading && !error">
         <h6>Filtre por blocos regionais</h6>
@@ -43,9 +43,10 @@ export default {
   },
   computed: {
     filteredCountries () {
-      // [0, 2, 3].some(el => [1, 2].includes(el))
-      if(this.regionalBlocsSelected.length > 0)
-        return this.countries.filter(country => country.regionalBlocs.some(bloc => this.regionalBlocsSelected.map(el => el.acronym).includes(bloc.acronym)))
+      if(this.regionalBlocsSelected.length > 0) // Filtra por blocos regionais caso algum tenha sido selecionado
+        return this.countries.filter(country => {
+          return country.regionalBlocs.some(bloc => this.regionalBlocsSelected.map(el => el.acronym).includes(bloc.acronym))
+        })
       else
         return this.countries
     },
