@@ -19,6 +19,7 @@ npm install
 ```
 
 ### Compilar e iniciar o hot reload para desenvolvimento
+- Após concluir a inicialização acesse http://localhost:8080/
 ```
 yarn serve
 ```
