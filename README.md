@@ -1,13 +1,12 @@
 # Lista de Países
 
 ## Demonstação
-- Disponível temporariamente em:
-- [http://paises-demo.ddns.net/](http://paises-demo.ddns.net/)
+- Disponível em:
+- [https://lista-paises.vercel.app/](https://lista-paises.vercel.app/)
 
 ## Instruções para instalação
 
 ### Instale as dependências
-- Você pode usar o gerênciador de pacotes que preferir (yarn, npm..)
 - Dentro da pasta do projeto execute os comandos a seguir
 
 ```
